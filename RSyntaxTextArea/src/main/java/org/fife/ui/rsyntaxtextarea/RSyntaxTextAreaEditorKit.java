@@ -1150,7 +1150,7 @@ public class RSyntaxTextAreaEditorKit extends RTextAreaEditorKit {
 		 */
 		@Override
 		protected boolean isAcceptablePrefix(String prefix) {
-			return prefix.length() > 0 &&
+			return !prefix.isEmpty() &&
 				isIdentifierChar(prefix.charAt(prefix.length()-1));
 		}
 
@@ -1475,7 +1475,7 @@ public class RSyntaxTextAreaEditorKit extends RTextAreaEditorKit {
 
 
 	/**
-	 * Action for when the user presses the Enter key.  This is here so we can
+	 * Action for when the user presses the Enter key.  This allows us to
 	 * be smart and "auto-indent" for programming languages.
 	 */
 	public static class InsertBreakAction

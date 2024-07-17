@@ -1180,9 +1180,7 @@ public class RTextAreaEditorKit extends DefaultEditorKit {
 						return;
 					}
 					lastWordStart = dot - lastPrefix.length();
-//					searchOffs = lastWordStart;
-//searchOffs = getWordStart(textArea, lastWordStart);
-searchOffs = Math.max(lastWordStart - 1, 0);
+					searchOffs = Math.max(lastWordStart - 1, 0);
 				}
 
 				while (searchOffs > 0) {
@@ -1248,7 +1246,7 @@ searchOffs = Math.max(lastWordStart - 1, 0);
 		 *         of the text area's current content.
 		 */
 		protected boolean isAcceptablePrefix(String prefix) {
-			return prefix.length() > 0 &&
+			return !prefix.isEmpty() &&
 				Character.isLetter(prefix.charAt(prefix.length()-1));
 		}
 
@@ -1937,9 +1935,9 @@ searchOffs = Math.max(lastWordStart - 1, 0);
 		@Override
 		public void actionPerformedImpl(ActionEvent e, RTextArea textArea) {
 			String selectedText = textArea.getSelectedText();
-			if (selectedText == null || selectedText.length() == 0) {
+			if (selectedText == null || selectedText.isEmpty()) {
 				selectedText = RTextArea.getSelectedOccurrenceText();
-				if (selectedText == null || selectedText.length() == 0) {
+				if (selectedText == null || selectedText.isEmpty()) {
 					UIManager.getLookAndFeel().provideErrorFeedback(textArea);
 					return;
 				}
@@ -2256,9 +2254,9 @@ searchOffs = Math.max(lastWordStart - 1, 0);
 		@Override
 		public void actionPerformedImpl(ActionEvent e, RTextArea textArea) {
 			String selectedText = textArea.getSelectedText();
-			if (selectedText == null || selectedText.length() == 0) {
+			if (selectedText == null || selectedText.isEmpty()) {
 				selectedText = RTextArea.getSelectedOccurrenceText();
-				if (selectedText == null || selectedText.length() == 0) {
+				if (selectedText == null || selectedText.isEmpty()) {
 					UIManager.getLookAndFeel().provideErrorFeedback(textArea);
 					return;
 				}
@@ -2876,7 +2874,7 @@ searchOffs = Math.max(lastWordStart - 1, 0);
 					}
 					if ((direction == -1 && y < initialY) ||
 						(direction == 1 && y > initialY)) {
-						// Only adjust if won't cause scrolling upward.
+						// Only adjust if it won't cause scrolling upward.
 						visible.y = y;
 					}
 				}
